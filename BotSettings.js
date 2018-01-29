@@ -19,11 +19,17 @@ BotSettings.add({
     minCharacters: Number,
 	minSeconds: Number,
 	votePercentage: Number,
-	blacklist: Types.TextArray,
 	reportTitle: String,
 	reportMessage: Types.Textarea,
 	reportMainTag: String,
-	reportTags: Types.TextArray
+	reportTags: Types.TextArray,
+	whitelist: Types.TextArray,
+	whiteListBid: Types.TextArray,
+	whiteListPercentage: Number,
+	goldlist: Types.TextArray,
+	goldListBid: Types.TextArray,
+	goldListPercentage: Number,
+	blacklist: Types.TextArray
 });
 
 // Provide access to Keystone
