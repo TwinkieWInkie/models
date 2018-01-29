@@ -2,6 +2,7 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 var steem = require('steem');
 const pm2 = require('pm2')
+const schedule = require('node-schedule')
 /**
  * User Model
  * ==========
@@ -29,16 +30,41 @@ BotSettings.add({
 	goldlist: Types.TextArray,
 	goldListBid: Types.TextArray,
 	goldListPercentage: Number,
-	blacklist: Types.TextArray
+	blacklist: Types.TextArray,
+	KeepOff: Boolean,
+	DontStartUntil: Boolean,
+	dontStartUntil: Types.Datetime,
+	KillBotOn: Boolean,
+	killBotOn: Types.Datetime
 });
 
 // Provide access to Keystone
 
-BotSettings.schema.post('save', function() {
-	pm2.restart('index', (err, res) => {
-		console.log(err)
-		console.log(res)
-	})
+BotSettings.schema.pre('save', function(next) {
+	pm2.stop('index')
+	
+	if (!this.KeepOff) {
+		if (!this.DontStartUntil) {
+			pm2.start({
+				script: 'transferBot/index.js'
+			})
+		} else {
+			schedule.scheduleJob(this.dontStartUntil, () => {
+				pm2.start('transferBot/index.js')
+			})
+			this.DontStartUntil = false
+		}
+
+		if (this.KillBotOn) {
+			schedule.scheduleJob(this.killBotOn, () => {
+				pm2.stop('index')
+			})
+			this.KillBotOn = false
+		}
+	}
+	
+	
+	next()
 })
 
 /**
