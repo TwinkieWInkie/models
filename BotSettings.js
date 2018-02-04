@@ -19,7 +19,7 @@ BotSettings.add({
     bidAmount: Number,
     minCharacters: Number,
 	minSeconds: Number,
-	votePercentage: Number,
+    voteValue: Number,
 	reportTitle: String,
 	reportMessage: Types.Textarea,
 	reportMainTag: String,
