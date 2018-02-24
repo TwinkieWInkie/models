@@ -17,7 +17,7 @@ Steem.add({
 	password: { type: Types.Password },
 	wif: String, 
 	claimed: { type: Boolean, default: false },
-	activated: Boolean
+	activated: { default: true, type: Boolean }
 });
 
 // Provide access to Keystone
