@@ -16,7 +16,7 @@ BotPosts.add({
 		type: String,
 		alias: 'memo'
 	},
-	trx_id: String,
+	trx_id: {type: String, unique: true },
 	memo: String,
 	permlink: String,
 	amount: String,
