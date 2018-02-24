@@ -17,6 +17,9 @@ resteem.add({
 
 resteem.schema.pre('save', function(next) {
 	if ( ! this.done ) {
+		console.log(typeof global.resteem)
+		console.log(global.resteem)
+		console.log(this)
 		global.resteem(this)
 			
 		this.done = true
