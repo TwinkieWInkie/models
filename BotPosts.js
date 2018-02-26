@@ -26,7 +26,8 @@ BotPosts.add({
 	receivedRefund: {type: Boolean, default: false},
 	receivedUpvote: {type: Boolean, default: false},
 	doRefund: { type: Boolean, default: false },
-	done: {type: Boolean, default: false}
+	done: {type: Boolean, default: false},
+	posted: {type: Boolean, default: false }
 });
 
 BotPosts.schema.loadClass(
